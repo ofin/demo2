@@ -6,7 +6,7 @@ const Home = () => {
         <>
             {/* <CssBaseline />
             <MyBreadcrumbs breadcrumbItem={breadcrumbItem} title="BENDAHARA" /> */}
-            <Container sx={{ mt: 10 }} maxWidth="xxl">
+            <Container sx={{ pt: 10 }} maxWidth="xxl">
                 <Grid container spacing={2} direction="row"
                     justifyContent="center"
                 >

@@ -1,18 +1,30 @@
-import { AppBar, Box, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
+import { AppBar, Box, Collapse, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import HomeIcon from '@mui/icons-material/Home';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 
 const Navbar = () => {
     const theme = useTheme();
     const [isOpenState, setIsOpenState] = useState();
     const location = useLocation();
+    const [mtOpen, setMtOpen] = useState(false);
+    const [personilMenu, setPersonilMenu] = useState(false)
     
+    const handleMtClick = () => {
+        setMtOpen(!mtOpen);
+    }
+
+    const handlePersonilMenuClick = () => {
+        setPersonilMenu(!personilMenu)
+    }
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -24,7 +36,7 @@ const Navbar = () => {
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 320 }}
             role="presentation"
             onKeyDown={toggleDrawer(false)}
         >
@@ -35,59 +47,48 @@ const Navbar = () => {
             </DrawerHeader>
 
             <List>
-                <ListItemButton to="/bnd" component={Link} selected={"/bnd" === location.pathname} onClick={toggleDrawer(false)}>
+                <ListItemButton sx={{ pl: 4 }}  to="/" component={Link} selected={"/" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
-                        {<HomeIcon />}
+                        {<HomeOutlinedIcon />}
                     </ListItemIcon>
                     <ListItemText primary="Home" />
                 </ListItemButton>
-                {/* <ListItemButton onClick={handlePencairanClick}>
+                <ListItemButton sx={{ pl: 4 }} onClick={handleMtClick}>
                     <ListItemIcon>
-                        <AssignmentIcon />
+                        <GroupsOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Pencairan" />
-                    {pencairanOpen ? <ExpandLess /> : <ExpandMore />}
+                    <ListItemText primary="Manajemen Tim" />
+                    {mtOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={pencairanOpen} timeout="auto" unmountOnExit>
+                <Collapse in={mtOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }} to="/bnd/spm" component={Link} selected={"/bnd/spm" === location.pathname} onClick={toggleDrawer(false)}>
-                            <ListItemIcon>
-                                <ArticleOutlined />
-                            </ListItemIcon>
-                            <ListItemText primary="UP / TU / GU" />
+                        
+                        <ListItemButton sx={{ pl: 11 }} onClick={handlePersonilMenuClick}>
+                            <ListItemText primary="Personil" />
+                            {personilMenu ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }} onClick={handleLsClick}>
-                            <ListItemIcon>
-                                <ArticleIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="LS" />
-                            {lsOpen ? <ExpandLess /> : <ExpandMore />}
-                        </ListItemButton>
-                        <Collapse in={lsOpen} timeout="auto" unmountOnExit>
+                        <Collapse in={personilMenu} timeout="auto" unmountOnExit>
                             <List component="div">
-                                <ListItemButton sx={{ pl: 8 }} to="/bnd/ls_gaji" component={Link} selected={"/bnd/ls_gaji" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemIcon>
-                                        <ArticleOutlined />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Gaji" />
+                                <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Data" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 8 }} to="/bnd/ls_bj" component={Link} selected={"/bnd/ls_bj" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemIcon>
-                                        <ArticleOutlined />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Barang / Jasa" />
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kab" component={Link} selected={"/personil/rekap-kab" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kabupaten" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 8 }} to="/bnd/ls_modal" component={Link} selected={"/bnd/ls_modal" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemIcon>
-                                        <ArticleOutlined />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Belanja Modal" />
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kec" component={Link} selected={"/personil/rekap-kec" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kecamatan" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-keldesa" component={Link} selected={"/personil/rekap-keldesa" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kel / Desa" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
+                        <ListItemButton sx={{ pl: 11 }} to="/tim" component={Link} selected={"/bnd" === location.pathname} onClick={toggleDrawer(false)}>
+                            <ListItemText primary="Daftar Tim" />
+                        </ListItemButton>
                     </List>
                 </Collapse>
-                <ListItemButton to="/bnd/acc" component={Link} selected={"/bnd/acc" === location.pathname} onClick={toggleDrawer(false)}>
+                {/* <ListItemButton to="/bnd/acc" component={Link} selected={"/bnd/acc" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<AssignmentTurnedInIcon />}
                     </ListItemIcon>
@@ -128,7 +129,7 @@ const Navbar = () => {
         <>
             <Box sx={{ flexGrow: 1 }} mb={2} >
                 <AppBar position="fixed" >
-                    <Toolbar sx={{ background: theme.palette.breadcrumbsBg }}>
+                    <Toolbar sx={{ background: "#37474f" }}>
                         <IconButton
                             size="large"
                             edge="start"
@@ -140,7 +141,7 @@ const Navbar = () => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            VERDONE
+                            DEMO
                         </Typography>
                         {/* <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
