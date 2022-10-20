@@ -10,20 +10,19 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 
 const Navbar = () => {
     const theme = useTheme();
     const [isOpenState, setIsOpenState] = useState();
     const location = useLocation();
     const [mtOpen, setMtOpen] = useState(false);
-    const [personilMenu, setPersonilMenu] = useState(false)
     
     const handleMtClick = () => {
         setMtOpen(!mtOpen);
-    }
-
-    const handlePersonilMenuClick = () => {
-        setPersonilMenu(!personilMenu)
     }
 
     const toggleDrawer = (open) => (event) => {
@@ -63,11 +62,17 @@ const Navbar = () => {
                 <Collapse in={mtOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         
-                        <ListItemButton sx={{ pl: 11 }} onClick={handlePersonilMenuClick}>
-                            <ListItemText primary="Personil" />
-                            {personilMenu ? <ExpandLess /> : <ExpandMore />}
+                        <ListItemButton sx={{ pl: 11 }} to="/partai" component={Link} selected={"/partai" === location.pathname} onClick={toggleDrawer(false)}>
+                            <ListItemText primary="Partai" />
                         </ListItemButton>
-                        <Collapse in={personilMenu} timeout="auto" unmountOnExit>
+                        <ListItemButton sx={{ pl: 11 }} to="/tim" component={Link} selected={"/tim" === location.pathname} onClick={toggleDrawer(false)}>
+                            <ListItemText primary="Daftar Tim" />
+                        </ListItemButton>
+                        <ListItemButton sx={{ pl: 11 }}>
+                            <ListItemText primary="Korkab" />
+                            <ExpandMore />
+                        </ListItemButton>
+                        <Collapse timeout="auto" unmountOnExit>
                             <List component="div">
                                 <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Data" />
@@ -83,11 +88,72 @@ const Navbar = () => {
                                 </ListItemButton>
                             </List>
                         </Collapse>
-                        <ListItemButton sx={{ pl: 11 }} to="/tim" component={Link} selected={"/bnd" === location.pathname} onClick={toggleDrawer(false)}>
-                            <ListItemText primary="Daftar Tim" />
+                        <ListItemButton sx={{ pl: 11 }}>
+                            <ListItemText primary="Korcam" />
+                            <ExpandMore />
                         </ListItemButton>
+                        <Collapse timeout="auto" unmountOnExit>
+                            <List component="div">
+                                <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Data" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kab" component={Link} selected={"/personil/rekap-kab" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kabupaten" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kec" component={Link} selected={"/personil/rekap-kec" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kecamatan" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-keldesa" component={Link} selected={"/personil/rekap-keldesa" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kel / Desa" />
+                                </ListItemButton>
+                            </List>
+                        </Collapse>
+                        <ListItemButton sx={{ pl: 11 }}>
+                            <ListItemText primary="Korkel" />
+                            <ExpandMore /> 
+                        </ListItemButton>
+                        <Collapse timeout="auto" unmountOnExit>
+                            <List component="div">
+                                <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Data" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kab" component={Link} selected={"/personil/rekap-kab" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kabupaten" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kec" component={Link} selected={"/personil/rekap-kec" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kecamatan" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-keldesa" component={Link} selected={"/personil/rekap-keldesa" === location.pathname} onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Rekap Kel / Desa" />
+                                </ListItemButton>
+                            </List>
+                        </Collapse>
                     </List>
                 </Collapse>
+                <ListItemButton sx={{ pl: 4 }}  to="/data_pemilih" component={Link} selected={"/data_pemilih" === location.pathname} onClick={toggleDrawer(false)}>
+                    <ListItemIcon>
+                        {<HowToRegIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary="Data Pemilih" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}  to="/dtdc" component={Link} selected={"/dtdc" === location.pathname} onClick={toggleDrawer(false)}>
+                    <ListItemIcon>
+                        {<MeetingRoomIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary="DTDC" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}  to="/agenda" component={Link} selected={"/agenda" === location.pathname} onClick={toggleDrawer(false)}>
+                    <ListItemIcon>
+                        {<CalendarMonthOutlinedIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary="Agenda" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}  to="/logistik" component={Link} selected={"/logistik" === location.pathname} onClick={toggleDrawer(false)}>
+                    <ListItemIcon>
+                        {<LocalShippingOutlinedIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary="Logistik" />
+                </ListItemButton>
                 {/* <ListItemButton to="/bnd/acc" component={Link} selected={"/bnd/acc" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<AssignmentTurnedInIcon />}
@@ -102,7 +168,7 @@ const Navbar = () => {
                 </ListItemButton> */}
             </List>
             <Divider />
-            <List>
+            {/* <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
@@ -113,7 +179,7 @@ const Navbar = () => {
                         </ListItemButton>
                     </ListItem>
                 ))}
-            </List>
+            </List> */}
         </Box>
     );
 
