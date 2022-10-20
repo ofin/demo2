@@ -1,17 +1,14 @@
 import { Container, Grid } from '@mui/material'
 import React from 'react'
 
-const Home = () => {
+const Partai = () => {
     return (
-        <>
-            {/* <CssBaseline />
-            <MyBreadcrumbs breadcrumbItem={breadcrumbItem} title="BENDAHARA" /> */}
-            <Container sx={{ pt: 10 }} maxWidth="xxl">
+        <Container sx={{ pt: 10 }} maxWidth="xxl">
                 <Grid container spacing={2} direction="row"
                     justifyContent="center"
                 >
                     <Grid item xs={12} md={12}>
-                        Home
+                        Partai
                     </Grid>
 
                     <Grid item xs={12} md={12}>
@@ -21,9 +18,7 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Container>
-
-        </>
     )
 }
 
-export default Home
+export default Partai

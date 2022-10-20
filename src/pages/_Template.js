@@ -8,7 +8,6 @@ const Template = () => {
             <Navbar />
 
             <Outlet />
-            dfsd
         </div>
     )
 }

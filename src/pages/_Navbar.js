@@ -1,12 +1,9 @@
-import { AppBar, Box, Collapse, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
+import { AppBar, Box, Collapse, Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, styled, Toolbar, Typography, useTheme } from '@mui/material';
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
@@ -20,7 +17,7 @@ const Navbar = () => {
     const [isOpenState, setIsOpenState] = useState();
     const location = useLocation();
     const [mtOpen, setMtOpen] = useState(false);
-    
+
     const handleMtClick = () => {
         setMtOpen(!mtOpen);
     }
@@ -46,13 +43,22 @@ const Navbar = () => {
             </DrawerHeader>
 
             <List>
-                <ListItemButton sx={{ pl: 4 }}  to="/" component={Link} selected={"/" === location.pathname} onClick={toggleDrawer(false)}>
+                <ListItemButton sx={{ pl: 4 }} to="/" component={Link} selected={"/" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<HomeOutlinedIcon />}
                     </ListItemIcon>
                     <ListItemText primary="Home" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }} onClick={handleMtClick}>
+                <ListItemButton
+                    sx={{ pl: 4 }}
+                    onClick={handleMtClick}
+                    selected={
+                        "/partai" === location.pathname ||
+                        "/pemenangan_a" === location.pathname ||
+                        "/pemenangan_b" === location.pathname ||
+                        "/relawan_tps" === location.pathname 
+                    }
+                >
                     <ListItemIcon>
                         <GroupsOutlinedIcon />
                     </ListItemIcon>
@@ -61,94 +67,39 @@ const Navbar = () => {
                 </ListItemButton>
                 <Collapse in={mtOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        
                         <ListItemButton sx={{ pl: 11 }} to="/partai" component={Link} selected={"/partai" === location.pathname} onClick={toggleDrawer(false)}>
                             <ListItemText primary="Partai" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 11 }} to="/tim" component={Link} selected={"/tim" === location.pathname} onClick={toggleDrawer(false)}>
-                            <ListItemText primary="Daftar Tim" />
+                        <ListItemButton sx={{ pl: 11 }} to="/pemenangan_a" component={Link} selected={"/pemenangan_a" === location.pathname} onClick={toggleDrawer(false)}>
+                            <ListItemText primary="Pemenangan A" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 11 }}>
-                            <ListItemText primary="Korkab" />
-                            <ExpandMore />
+                        <ListItemButton sx={{ pl: 11 }} to="/pemenangan_b" component={Link} selected={"/pemenangan_b" === location.pathname} onClick={toggleDrawer(false)}>
+                            <ListItemText primary="Pemenangan B" />
                         </ListItemButton>
-                        <Collapse timeout="auto" unmountOnExit>
-                            <List component="div">
-                                <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Data" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kab" component={Link} selected={"/personil/rekap-kab" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kabupaten" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kec" component={Link} selected={"/personil/rekap-kec" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kecamatan" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-keldesa" component={Link} selected={"/personil/rekap-keldesa" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kel / Desa" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
-                        <ListItemButton sx={{ pl: 11 }}>
-                            <ListItemText primary="Korcam" />
-                            <ExpandMore />
+                        <ListItemButton sx={{ pl: 11 }} to="/relawan_tps" component={Link} selected={"/relawan_tps" === location.pathname} onClick={toggleDrawer(false)}>
+                            <ListItemText primary="Relawan TPS" />
                         </ListItemButton>
-                        <Collapse timeout="auto" unmountOnExit>
-                            <List component="div">
-                                <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Data" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kab" component={Link} selected={"/personil/rekap-kab" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kabupaten" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kec" component={Link} selected={"/personil/rekap-kec" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kecamatan" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-keldesa" component={Link} selected={"/personil/rekap-keldesa" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kel / Desa" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
-                        <ListItemButton sx={{ pl: 11 }}>
-                            <ListItemText primary="Korkel" />
-                            <ExpandMore /> 
-                        </ListItemButton>
-                        <Collapse timeout="auto" unmountOnExit>
-                            <List component="div">
-                                <ListItemButton sx={{ pl: 14 }} to="/personil" component={Link} selected={"/personil" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Data" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kab" component={Link} selected={"/personil/rekap-kab" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kabupaten" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-kec" component={Link} selected={"/personil/rekap-kec" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kecamatan" />
-                                </ListItemButton>
-                                <ListItemButton sx={{ pl: 14 }} to="/personil/rekap-keldesa" component={Link} selected={"/personil/rekap-keldesa" === location.pathname} onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Rekap Kel / Desa" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
                     </List>
                 </Collapse>
-                <ListItemButton sx={{ pl: 4 }}  to="/data_pemilih" component={Link} selected={"/data_pemilih" === location.pathname} onClick={toggleDrawer(false)}>
+                <ListItemButton sx={{ pl: 4 }} to="/data_pemilih" component={Link} selected={"/data_pemilih" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<HowToRegIcon />}
                     </ListItemIcon>
                     <ListItemText primary="Data Pemilih" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}  to="/dtdc" component={Link} selected={"/dtdc" === location.pathname} onClick={toggleDrawer(false)}>
+                <ListItemButton sx={{ pl: 4 }} to="/dtdc" component={Link} selected={"/dtdc" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<MeetingRoomIcon />}
                     </ListItemIcon>
                     <ListItemText primary="DTDC" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}  to="/agenda" component={Link} selected={"/agenda" === location.pathname} onClick={toggleDrawer(false)}>
+                <ListItemButton sx={{ pl: 4 }} to="/agenda" component={Link} selected={"/agenda" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<CalendarMonthOutlinedIcon />}
                     </ListItemIcon>
                     <ListItemText primary="Agenda" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}  to="/logistik" component={Link} selected={"/logistik" === location.pathname} onClick={toggleDrawer(false)}>
+                <ListItemButton sx={{ pl: 4 }} to="/logistik" component={Link} selected={"/logistik" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<LocalShippingOutlinedIcon />}
                     </ListItemIcon>
