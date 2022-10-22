@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/Menu';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ExpandLess, ExpandMore, ShareOutlined } from '@mui/icons-material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
@@ -81,6 +81,12 @@ const Navbar = () => {
                         </ListItemButton>
                     </List>
                 </Collapse>
+                <ListItemButton sx={{ pl: 4 }} to="/broadcast" component={Link} selected={"/broadcast" === location.pathname} onClick={toggleDrawer(false)}>
+                    <ListItemIcon>
+                        {<ShareOutlined />}
+                    </ListItemIcon>
+                    <ListItemText primary="Broadcast" />
+                </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} to="/data_pemilih" component={Link} selected={"/data_pemilih" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<HowToRegIcon />}
@@ -105,6 +111,7 @@ const Navbar = () => {
                     </ListItemIcon>
                     <ListItemText primary="Logistik" />
                 </ListItemButton>
+                
                 {/* <ListItemButton to="/bnd/acc" component={Link} selected={"/bnd/acc" === location.pathname} onClick={toggleDrawer(false)}>
                     <ListItemIcon>
                         {<AssignmentTurnedInIcon />}
@@ -146,7 +153,7 @@ const Navbar = () => {
         <>
             <Box sx={{ flexGrow: 1 }} mb={2} >
                 <AppBar position="fixed" >
-                    <Toolbar sx={{ background: "#37474f" }}>
+                    <Toolbar sx={{ background: "#292E49" }}>
                         <IconButton
                             size="large"
                             edge="start"
